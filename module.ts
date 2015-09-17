@@ -3,6 +3,9 @@ module is.authentication
   angular
     .module('is.authentication', [])
 
+    // directives
+    .directive('authenticated', AuthenticatedToggleDirective)
+
     // Services
     .service('authenticationService', AuthenticationService)
     .service('authenticationStorage', AuthenticationStorage)

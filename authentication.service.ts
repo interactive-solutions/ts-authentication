@@ -115,7 +115,7 @@ module is.authentication {
         url: '/oauth/token',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         data: queryString
-      }).then(function (response:ng.IHttpPromiseCallbackArg<any>) {
+      }).then((response:ng.IHttpPromiseCallbackArg<any>) => {
 
         // Time is returned in ms.
         var now = new Date().getTime() / 1000;
@@ -130,8 +130,7 @@ module is.authentication {
 
         // Persist it
         this.storage.write(accessToken);
-
-      }.bind(this));
+      });
     }
 
     refresh():ng.IPromise<void> {
@@ -148,7 +147,7 @@ module is.authentication {
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           data: queryString
         })
-        .then(function (response:ng.IHttpPromiseCallbackArg<any>) {
+        .then((response:ng.IHttpPromiseCallbackArg<any>) => {
 
           // Time is returned in ms.
           var now = new Date().getTime() / 1000;
@@ -164,7 +163,7 @@ module is.authentication {
           // Persist it
           this.storage.write(accessToken);
 
-        }.bind(this))
+        })
         .catch(() => this.storage.clear());
     }
 
