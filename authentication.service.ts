@@ -100,13 +100,27 @@ module is.authentication {
 
     private http:ng.IHttpService;
     private storage:AuthenticationStorage;
+    private rootScope:ng.IRootScopeService;
 
-    constructor($http:ng.IHttpService, authenticationStorage:AuthenticationStorage) {
+    /**
+     * @param $http
+     * @param $rootScope
+     * @param authenticationStorage
+     */
+    constructor($http:ng.IHttpService, $rootScope: ng.IRootScopeService, authenticationStorage:AuthenticationStorage) {
       this.http = $http;
+      this.rootScope = $rootScope;
       this.storage = authenticationStorage;
     }
 
-    login(parameters:any):ng.IPromise<any> {
+    /**
+     * Authenticate
+     *
+     * @param parameters
+     *
+     * @returns {IPromise<void>}
+     */
+    login(parameters:any):ng.IPromise<void> {
 
       var queryString = QueryString.stringify(parameters);
 
@@ -130,9 +144,17 @@ module is.authentication {
 
         // Persist it
         this.storage.write(accessToken);
+
+        // Trigger a auth event
+        this.rootScope.$emit('authEvent', this);
       });
     }
 
+    /**
+     * Use the refresh token to generate a new access token
+     *
+     * @returns {IPromise<void>}
+     */
     refresh():ng.IPromise<void> {
 
       var queryString = QueryString.stringify({
@@ -162,11 +184,15 @@ module is.authentication {
 
           // Persist it
           this.storage.write(accessToken);
-
         })
         .catch(() => this.storage.clear());
     }
 
+    /**
+     * Check if the current user is authenticated, does not test if it's still valid tho.
+     *
+     * @returns {boolean}
+     */
     isAuthenticated():boolean {
       var now:number = new Date().getTime() / 1000;
       var token:AccessToken = this.storage.read();
@@ -178,8 +204,16 @@ module is.authentication {
       return token.getExpiresAt() >= now;
     }
 
+    /**
+     * Remove the oauth token and trigger a auth event
+     */
     logout():void {
+
+      // Delete the oauth token
       this.storage.clear();
+
+      // Trigger a auth event
+      this.rootScope.$emit('authEvent', this);
     }
   }
 }
