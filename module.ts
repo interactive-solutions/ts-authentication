@@ -14,6 +14,9 @@ module is.authentication
     .factory('httpAuthorizationInjector', HttpAuthorizationInjector)
     .factory('httpRefreshTokenInjector', HttpRefreshTokenInjector)
 
+    // Constants
+    .constant('loginStateName', 'login')
+
     .config(function ($httpProvider: ng.IHttpProvider) {
 
       $httpProvider.interceptors.push('httpAuthorizationInjector');

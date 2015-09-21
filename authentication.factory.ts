@@ -19,7 +19,7 @@ module is.authentication
     }
   }
 
-  export function HttpRefreshTokenInjector($q: ng.IQService, $injector: any) {
+  export function HttpRefreshTokenInjector(loginStateName: string, $q: ng.IQService, $injector: any) {
 
     return {
       responseError: function (response: ng.IHttpPromiseCallbackArg<any>) {
@@ -39,11 +39,7 @@ module is.authentication
               .catch(() => authStorage.clear());
 
           } else {
-
-            // TODO: SHOULD REALLY BE START-PAGE
-
-            // No access token, well fuck you, go login.
-            stateService.go('auth.password');
+            stateService.go(loginStateName);
           }
         }
 
