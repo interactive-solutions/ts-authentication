@@ -1,7 +1,7 @@
 module is.authentication
 {
   angular
-    .module('is.authentication', [])
+    .module('is.authentication', ['is.stdlib'])
 
     // directives
     .directive('authenticated', AuthenticatedToggleDirective)
