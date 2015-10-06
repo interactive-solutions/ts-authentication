@@ -122,7 +122,7 @@ module is.authentication {
      */
     login(parameters:any):ng.IPromise<void> {
 
-      var queryString = QueryString.stringify(parameters);
+      var queryString = is.stdlib.QueryString.stringify(parameters);
 
       return this.http({
         method: 'POST',
@@ -157,7 +157,7 @@ module is.authentication {
      */
     refresh():ng.IPromise<void> {
 
-      var queryString = QueryString.stringify({
+      var queryString = is.stdlib.QueryString.stringify({
         grant_type: 'refresh_token',
         refresh_token: this.storage.read().getRefreshToken()
       });
