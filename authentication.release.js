@@ -22,10 +22,10 @@ var is;
         function HttpRefreshTokenInjector(loginStateName, $q, $injector) {
             return {
                 responseError: function (response) {
-                    var httpService = $injector('$http');
-                    var authService = $injector('authenticationService');
-                    var authStorage = $injector('authenticationStorage');
-                    var stateService = $injector('$state');
+                    var httpService = $injector.get('$http');
+                    var authService = $injector.get('authenticationService');
+                    var authStorage = $injector.get('authenticationStorage');
+                    var stateService = $injector.get('$state');
                     if (response.status === 401) {
                         if (authStorage.hasAccessToken()) {
                             return authService
