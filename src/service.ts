@@ -7,6 +7,7 @@
 module is.authentication {
 
   import QueryString = is.stdlib.QueryString;
+  import EventManager = is.stdlib.EventManager;
 
   /**
    * Simple data container for the access token
@@ -94,20 +95,19 @@ module is.authentication {
   }
 
   /* @ngInject */
-  export class AuthenticationService {
+  export class AuthenticationService extends EventManager {
 
     private http: ng.IHttpService;
     private storage: AuthenticationStorage;
-    private rootScope: ng.IRootScopeService;
 
     /**
      * @param $http
-     * @param $rootScope
      * @param authenticationStorage
      */
-    constructor($http: ng.IHttpService, $rootScope: ng.IRootScopeService, authenticationStorage: AuthenticationStorage) {
+    constructor($http: ng.IHttpService, authenticationStorage: AuthenticationStorage) {
+      super();
+
       this.http = $http;
-      this.rootScope = $rootScope;
       this.storage = authenticationStorage;
     }
 
@@ -144,7 +144,7 @@ module is.authentication {
         this.storage.write(accessToken);
 
         // Trigger a auth event
-        this.rootScope.$emit('authEvent', this);
+        this.emit('authentication-changed', this);
       });
     }
 
@@ -183,7 +183,10 @@ module is.authentication {
           // Persist it
           this.storage.write(accessToken);
         })
-        .catch(() => this.storage.clear());
+        .catch(() => {
+          this.storage.clear();
+          this.emit('authentication-changed', this);
+        });
     }
 
     /**
@@ -211,7 +214,7 @@ module is.authentication {
       this.storage.clear();
 
       // Trigger a auth event
-      this.rootScope.$emit('authEvent', this);
+      this.emit('authentication-changed', this);
     }
   }
 }

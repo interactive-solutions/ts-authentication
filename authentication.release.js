@@ -49,11 +49,17 @@ var is;
  *
  * @copyright Interactive Solutions AB
  */
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var is;
 (function (is) {
     var authentication;
     (function (authentication) {
         var QueryString = is.stdlib.QueryString;
+        var EventManager = is.stdlib.EventManager;
         /**
          * Simple data container for the access token
          */
@@ -126,15 +132,15 @@ var is;
         })();
         authentication.AuthenticationStorage = AuthenticationStorage;
         /* @ngInject */
-        var AuthenticationService = (function () {
+        var AuthenticationService = (function (_super) {
+            __extends(AuthenticationService, _super);
             /**
              * @param $http
-             * @param $rootScope
              * @param authenticationStorage
              */
-            function AuthenticationService($http, $rootScope, authenticationStorage) {
+            function AuthenticationService($http, authenticationStorage) {
+                _super.call(this);
                 this.http = $http;
-                this.rootScope = $rootScope;
                 this.storage = authenticationStorage;
             }
             /**
@@ -159,7 +165,7 @@ var is;
                     // Persist it
                     _this.storage.write(accessToken);
                     // Trigger a auth event
-                    _this.rootScope.$emit('authEvent', _this);
+                    _this.emit('authentication-changed', _this);
                 });
             };
             /**
@@ -187,7 +193,10 @@ var is;
                     // Persist it
                     _this.storage.write(accessToken);
                 })
-                    .catch(function () { return _this.storage.clear(); });
+                    .catch(function () {
+                    _this.storage.clear();
+                    _this.emit('authentication-changed', _this);
+                });
             };
             /**
              * Check if the current user is authenticated, does not test if it's still valid tho.
@@ -209,10 +218,10 @@ var is;
                 // Delete the oauth token
                 this.storage.clear();
                 // Trigger a auth event
-                this.rootScope.$emit('authEvent', this);
+                this.emit('authentication-changed', this);
             };
             return AuthenticationService;
-        })();
+        })(EventManager);
         authentication.AuthenticationService = AuthenticationService;
     })(authentication = is.authentication || (is.authentication = {}));
 })(is || (is = {}));
