@@ -25,10 +25,10 @@ module is.authentication {
     return {
       responseError: function (response: ng.IHttpPromiseCallbackArg<any>) {
 
-        var httpService: ng.IHttpService = $injector('$http');
-        var authService: AuthenticationService = $injector('authenticationService');
-        var authStorage: AuthenticationStorage = $injector('authenticationStorage');
-        var stateService: ng.ui.IStateService = $injector('$state');
+        var httpService: ng.IHttpService = $injector.get('$http');
+        var authService: AuthenticationService = $injector.get('authenticationService');
+        var authStorage: AuthenticationStorage = $injector.get('authenticationStorage');
+        var stateService: ng.ui.IStateService = $injector.get('$state');
 
         if (response.status === 401) {
 
