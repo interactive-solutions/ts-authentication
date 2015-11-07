@@ -1,12 +1,12 @@
 {
   "name": "interactivesolutions-ts-authentication",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "homepage": "https://github.com/interactive-solutions/ts-authentication",
   "authors": [
-    "Antoine Hedgecock <antoine.hedgecock@gmail.com>"
+    "Antoine Hedgecock <antoine.hedgecock@gmail.com>",
+    "Erik Norgren <erik.norgren@interactivesolutions.se>"
   ],
   "description": "Simple angular/typescript authentication module",
-  "main": "",
   "moduleType": [],
   "keywords": [
     "angular",
@@ -26,5 +26,10 @@
   "dependencies": {
     "angular": "~1.4",
     "interactivesolutions-ts-stdlib": "~0.0.1"
+  },
+
+  "main": "authentication.release.js",
+  "typescript": {
+    "definition": "authentication.d.ts"
   }
 }

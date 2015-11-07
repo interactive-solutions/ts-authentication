@@ -1,10 +1,11 @@
-module is.authentication
-{
-  angular
-    .module('is.authentication', ['is.stdlib'])
+///<reference path='typings/angularjs/angular.d.ts'/>
+///<reference path='typings/angular-ui-router/angular-ui-router.d.ts'/>
+///<reference path='typings/is-stdlib/stdlib.d.ts'/>
 
-    // directives
-    .directive('authenticated', AuthenticatedToggleDirective)
+module is.authentication {
+
+  angular
+    .module('is.authentication', [])
 
     // Services
     .service('authenticationService', AuthenticationService)
@@ -17,8 +18,9 @@ module is.authentication
     // Constants
     .constant('loginStateName', 'login')
 
-    .config(function ($httpProvider: ng.IHttpProvider) {
+    .config(function ($httpProvider:ng.IHttpProvider) {
       $httpProvider.interceptors.push('httpAuthorizationInjector');
       $httpProvider.interceptors.push('httpRefreshTokenInjector');
-    })
+    });
+
 }
