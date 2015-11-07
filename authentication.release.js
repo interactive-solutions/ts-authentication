@@ -2,6 +2,7 @@ var is;
 (function (is) {
     var authentication;
     (function (authentication) {
+        /* @ngInject */
         function HttpAuthorizationInjector(authenticationStorage) {
             return {
                 request: function (request) {
@@ -17,6 +18,7 @@ var is;
             };
         }
         authentication.HttpAuthorizationInjector = HttpAuthorizationInjector;
+        /* @ngInject */
         function HttpRefreshTokenInjector(loginStateName, $q, $injector) {
             return {
                 responseError: function (response) {

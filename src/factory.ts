@@ -1,23 +1,25 @@
 module is.authentication {
 
+  /* @ngInject */
   export function HttpAuthorizationInjector(authenticationStorage: AuthenticationStorage) {
-  return {
-    request: function (request: ng.IRequestConfig) {
+    return {
+      request: function (request: ng.IRequestConfig) {
 
-      if (request.url.indexOf('/oauth/token') !== -1) {
+        if (request.url.indexOf('/oauth/token') !== -1) {
+          return request;
+        }
+
+        var token = authenticationStorage.read();
+        if (token) {
+          request.headers['Authorization'] = 'Bearer ' + token.getAccessToken();
+        }
+
         return request;
       }
+    };
+  }
 
-      var token = authenticationStorage.read();
-      if (token) {
-        request.headers['Authorization'] = 'Bearer ' + token.getAccessToken();
-      }
-
-      return request;
-    }
-  };
-}
-
+  /* @ngInject */
   export function HttpRefreshTokenInjector(loginStateName: string, $q: ng.IQService, $injector: any) {
 
     return {
