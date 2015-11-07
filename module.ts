@@ -1,7 +1,3 @@
-///<reference path='typings/angularjs/angular.d.ts'/>
-///<reference path='typings/angular-ui-router/angular-ui-router.d.ts'/>
-///<reference path='typings/is-stdlib/stdlib.d.ts'/>
-
 module is.authentication {
 
   angular

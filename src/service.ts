@@ -41,9 +41,7 @@ module is.authentication {
     }
   }
 
-  /**
-   * Storage class, handles reading and writing to local storage.
-   */
+  /* @ngInject */
   export class AuthenticationStorage {
 
     private accessToken: AccessToken = null;
@@ -95,9 +93,7 @@ module is.authentication {
     }
   }
 
-  /**
-   *
-   */
+  /* @ngInject */
   export class AuthenticationService {
 
     private http: ng.IHttpService;

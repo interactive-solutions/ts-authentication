@@ -81,9 +81,7 @@ var is;
             return AccessToken;
         })();
         authentication.AccessToken = AccessToken;
-        /**
-         * Storage class, handles reading and writing to local storage.
-         */
+        /* @ngInject */
         var AuthenticationStorage = (function () {
             function AuthenticationStorage() {
                 this.accessToken = null;
@@ -125,9 +123,7 @@ var is;
             return AuthenticationStorage;
         })();
         authentication.AuthenticationStorage = AuthenticationStorage;
-        /**
-         *
-         */
+        /* @ngInject */
         var AuthenticationService = (function () {
             /**
              * @param $http
@@ -218,9 +214,6 @@ var is;
         authentication.AuthenticationService = AuthenticationService;
     })(authentication = is.authentication || (is.authentication = {}));
 })(is || (is = {}));
-///<reference path='typings/angularjs/angular.d.ts'/>
-///<reference path='typings/angular-ui-router/angular-ui-router.d.ts'/>
-///<reference path='typings/is-stdlib/stdlib.d.ts'/>
 var is;
 (function (is) {
     var authentication;

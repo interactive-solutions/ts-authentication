@@ -1,6 +1,3 @@
-/// <reference path="typings/angularjs/angular.d.ts" />
-/// <reference path="typings/angular-ui-router/angular-ui-router.d.ts" />
-/// <reference path="typings/is-stdlib/stdlib.d.ts" />
 declare module is.authentication {
     function HttpAuthorizationInjector(authenticationStorage: AuthenticationStorage): {
         request: (request: ng.IRequestConfig) => ng.IRequestConfig;
