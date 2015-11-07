@@ -1,6 +1,6 @@
 {
-  "name": "interactivesolutions-ts-authentication",
-  "version": "1.0.0",
+  "name": "ts-authentication",
+  "version": "1.0.1",
   "homepage": "https://github.com/interactive-solutions/ts-authentication",
   "authors": [
     "Antoine Hedgecock <antoine.hedgecock@gmail.com>",
