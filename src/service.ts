@@ -193,9 +193,7 @@ module is.authentication {
           this.storage.clear();
           this.emit('authentication-changed', this);
         })
-        .finally(() => {
-          this.refreshPromise = null;
-        });
+        .finally(() => this.refreshPromise = null);
 
       return this.refreshPromise;
     }
