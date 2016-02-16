@@ -100,6 +100,8 @@ module is.authentication {
     private http: ng.IHttpService;
     private storage: AuthenticationStorage;
 
+    private refreshPromise: ng.IPromise<void> = null;
+
     /**
      * @param $http
      * @param authenticationStorage
@@ -155,12 +157,16 @@ module is.authentication {
      */
     refresh(): ng.IPromise<void> {
 
+      if (this.refreshPromise) {
+        return this.refreshPromise;
+      }
+
       var queryString = QueryString.stringify({
         grant_type:  'refresh_token',
         refresh_token:  this.storage.read().getRefreshToken()
       });
 
-      return this
+      this.refreshPromise = this
         .http({
           method:  'POST',
           url:  '/oauth/token',
@@ -186,7 +192,12 @@ module is.authentication {
         .catch(() => {
           this.storage.clear();
           this.emit('authentication-changed', this);
+        })
+        .finally(() => {
+          this.refreshPromise = null;
         });
+
+      return this.refreshPromise;
     }
 
     /**
