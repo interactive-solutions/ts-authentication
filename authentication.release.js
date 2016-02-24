@@ -1,3 +1,8 @@
+/**
+ * @author    Antoine Hedgecock <antoine.hedgecock@gmail.com>
+ *
+ * @copyright Interactive Solutions AB
+ */
 var is;
 (function (is) {
     var authentication;
@@ -44,11 +49,6 @@ var is;
         authentication.HttpRefreshTokenInjector = HttpRefreshTokenInjector;
     })(authentication = is.authentication || (is.authentication = {}));
 })(is || (is = {}));
-/**
- * @author    Antoine Hedgecock <antoine.hedgecock@gmail.com>
- *
- * @copyright Interactive Solutions AB
- */
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -140,6 +140,7 @@ var is;
              */
             function AuthenticationService($http, authenticationStorage) {
                 _super.call(this);
+                this.refreshPromise = null;
                 this.http = $http;
                 this.storage = authenticationStorage;
             }
@@ -175,11 +176,14 @@ var is;
              */
             AuthenticationService.prototype.refresh = function () {
                 var _this = this;
+                if (this.refreshPromise) {
+                    return this.refreshPromise;
+                }
                 var queryString = QueryString.stringify({
                     grant_type: 'refresh_token',
                     refresh_token: this.storage.read().getRefreshToken()
                 });
-                return this
+                this.refreshPromise = this
                     .http({
                     method: 'POST',
                     url: '/oauth/token',
@@ -196,7 +200,9 @@ var is;
                     .catch(function () {
                     _this.storage.clear();
                     _this.emit('authentication-changed', _this);
-                });
+                })
+                    .finally(function () { return _this.refreshPromise = null; });
+                return this.refreshPromise;
             };
             /**
              * Check if the current user is authenticated, does not test if it's still valid tho.
@@ -237,8 +243,8 @@ var is;
             .factory('httpRefreshTokenInjector', authentication.HttpRefreshTokenInjector)
             .constant('loginStateName', 'login')
             .config(function ($httpProvider) {
-            $httpProvider.interceptors.push('httpAuthorizationInjector');
-            $httpProvider.interceptors.push('httpRefreshTokenInjector');
-        });
+                $httpProvider.interceptors.push('httpAuthorizationInjector');
+                $httpProvider.interceptors.push('httpRefreshTokenInjector');
+            });
     })(authentication = is.authentication || (is.authentication = {}));
 })(is || (is = {}));
