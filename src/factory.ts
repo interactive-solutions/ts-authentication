@@ -1,16 +1,19 @@
 module is.authentication {
 
+  interface IsRequestConfig extends ng.IRequestConfig {
+    disableAuthorizationHeader?:boolean;
+  }
+
   /* @ngInject */
   export function HttpAuthorizationInjector(authenticationStorage: AuthenticationStorage) {
     return {
-      request: function (request: ng.IRequestConfig) {
-
+      request: function (request: IsRequestConfig) {
         if (request.url.indexOf('/oauth/token') !== -1) {
           return request;
         }
 
         var token = authenticationStorage.read();
-        if (token) {
+        if (token && !request.disableAuthorizationHeader) {
           request.headers['Authorization'] = 'Bearer ' + token.getAccessToken();
         }
 

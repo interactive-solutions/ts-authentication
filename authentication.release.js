@@ -10,7 +10,7 @@ var is;
                         return request;
                     }
                     var token = authenticationStorage.read();
-                    if (token) {
+                    if (token && !request.disableAuthorizationHeader) {
                         request.headers['Authorization'] = 'Bearer ' + token.getAccessToken();
                     }
                     return request;
