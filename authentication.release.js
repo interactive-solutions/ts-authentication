@@ -1,8 +1,3 @@
-/**
- * @author    Antoine Hedgecock <antoine.hedgecock@gmail.com>
- *
- * @copyright Interactive Solutions AB
- */
 var is;
 (function (is) {
     var authentication;
@@ -49,6 +44,11 @@ var is;
         authentication.HttpRefreshTokenInjector = HttpRefreshTokenInjector;
     })(authentication = is.authentication || (is.authentication = {}));
 })(is || (is = {}));
+/**
+ * @author    Antoine Hedgecock <antoine.hedgecock@gmail.com>
+ *
+ * @copyright Interactive Solutions AB
+ */
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -231,6 +231,10 @@ var is;
         authentication.AuthenticationService = AuthenticationService;
     })(authentication = is.authentication || (is.authentication = {}));
 })(is || (is = {}));
+/**
+ * @author Erik Norgren <erik.norgren@interactivesolutions.se>
+ * @copyright Interactive Solutions
+ */
 var is;
 (function (is) {
     var authentication;
@@ -241,10 +245,9 @@ var is;
             .service('authenticationStorage', authentication.AuthenticationStorage)
             .factory('httpAuthorizationInjector', authentication.HttpAuthorizationInjector)
             .factory('httpRefreshTokenInjector', authentication.HttpRefreshTokenInjector)
-            .constant('loginStateName', 'login')
             .config(function ($httpProvider) {
-                $httpProvider.interceptors.push('httpAuthorizationInjector');
-                $httpProvider.interceptors.push('httpRefreshTokenInjector');
-            });
+            $httpProvider.interceptors.push('httpAuthorizationInjector');
+            $httpProvider.interceptors.push('httpRefreshTokenInjector');
+        });
     })(authentication = is.authentication || (is.authentication = {}));
 })(is || (is = {}));
