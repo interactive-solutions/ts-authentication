@@ -24,8 +24,8 @@
   ],
 
   "dependencies": {
-    "angular": "~1.4",
-    "ts-stdlib": "~1.0.0"
+    "angular": "^1.4",
+    "interactivesolutions-event-manager": "0.0.5"
   },
 
   "main": "authentication.release.js",

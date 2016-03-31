@@ -1,12 +1,16 @@
 /**
  * @author Erik Norgren <erik.norgren@interactivesolutions.se>
+ *     
  * @copyright Interactive Solutions
  */
 
-module is.authentication
+import {AuthenticationService, AuthenticationStorage} from "./service";
+import {HttpAuthorizationInjector, HttpRefreshTokenInjector} from "./factory";
+
+module interactivesolutions.authentication
 {
   angular
-    .module('is.authentication', [])
+    .module('interactivesolutions.authentication', [])
 
     // Services
     .service('authenticationService', AuthenticationService)

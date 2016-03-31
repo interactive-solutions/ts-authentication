@@ -1,0 +1,23 @@
+{
+  "name": "interactivesolutions-authentication",
+  "version": "0.0.0-dev",
+  "description": "",
+  "main": "dist.js",
+  "dependencies": {
+    "ts-loader": "^0.8.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/interactive-solutions/ts-authentication.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/interactive-solutions/ts-authentication/issues"
+  },
+  "homepage": "https://github.com/interactive-solutions/ts-authentication#readme"
+}

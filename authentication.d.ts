@@ -4,7 +4,7 @@
  * @copyright Interactive Solutions AB
  */
 
-declare module is.authentication {
+declare module 'interactivesolutions' {
 
     function HttpAuthorizationInjector(authenticationStorage: AuthenticationStorage): {
         request: (request: ng.IRequestConfig) => ng.IRequestConfig;
@@ -39,7 +39,7 @@ declare module is.authentication {
         private fromLocalStorage();
     }
 
-    class AuthenticationService extends is.stdlib.EventManager {
+    class AuthenticationService extends EventManager {
 
         /**
          * @param $http
