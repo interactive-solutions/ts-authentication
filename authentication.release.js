@@ -1,3 +1,8 @@
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var is;
 (function (is) {
     var authentication;
@@ -49,11 +54,6 @@ var is;
  *
  * @copyright Interactive Solutions AB
  */
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
 var is;
 (function (is) {
     var authentication;
@@ -87,7 +87,7 @@ var is;
                 return this.tokenType;
             };
             return AccessToken;
-        })();
+        }());
         authentication.AccessToken = AccessToken;
         /* @ngInject */
         var AuthenticationStorage = (function () {
@@ -129,7 +129,7 @@ var is;
                 this.accessToken = new AccessToken(accessToken, ownerId, expiresAt, refreshToken, tokenType);
             };
             return AuthenticationStorage;
-        })();
+        }());
         authentication.AuthenticationStorage = AuthenticationStorage;
         /* @ngInject */
         var AuthenticationService = (function (_super) {
@@ -137,11 +137,13 @@ var is;
             /**
              * @param $http
              * @param authenticationStorage
+             * @param $q
              */
-            function AuthenticationService($http, authenticationStorage) {
+            function AuthenticationService($http, authenticationStorage, $q) {
                 _super.call(this);
                 this.refreshPromise = null;
                 this.http = $http;
+                this.q = $q;
                 this.storage = authenticationStorage;
             }
             /**
@@ -200,6 +202,7 @@ var is;
                     .catch(function () {
                     _this.storage.clear();
                     _this.emit('authentication-changed', _this);
+                    return _this.q.reject();
                 })
                     .finally(function () { return _this.refreshPromise = null; });
                 return this.refreshPromise;
@@ -227,7 +230,7 @@ var is;
                 this.emit('authentication-changed', this);
             };
             return AuthenticationService;
-        })(EventManager);
+        }(EventManager));
         authentication.AuthenticationService = AuthenticationService;
     })(authentication = is.authentication || (is.authentication = {}));
 })(is || (is = {}));

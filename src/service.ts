@@ -98,6 +98,7 @@ module is.authentication {
   export class AuthenticationService extends EventManager {
 
     private http: ng.IHttpService;
+    private q:ng.IQService;
     private storage: AuthenticationStorage;
 
     private refreshPromise: ng.IPromise<void> = null;
@@ -105,11 +106,13 @@ module is.authentication {
     /**
      * @param $http
      * @param authenticationStorage
+     * @param $q
      */
-    constructor($http: ng.IHttpService, authenticationStorage: AuthenticationStorage) {
+    constructor($http: ng.IHttpService, authenticationStorage: AuthenticationStorage, $q: ng.IQService) {
       super();
 
       this.http = $http;
+      this.q = $q;
       this.storage = authenticationStorage;
     }
 
@@ -192,6 +195,8 @@ module is.authentication {
         .catch(() => {
           this.storage.clear();
           this.emit('authentication-changed', this);
+
+          return this.q.reject();
         })
         .finally(() => this.refreshPromise = null);
 
