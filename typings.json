@@ -2,13 +2,13 @@
   "name": "interactivesolutions-authentication",
   "version": false,
   "main": "authentication.d.ts",
-  "ambientDependencies": {
-    "angular": "registry:dt/angular#1.5.0+20160328125810",
-    "angular-ui-router": "registry:dt/angular-ui-router#1.1.5+20160317120654",
-    "jquery": "registry:dt/jquery#1.10.0+20160316155526"
-  },
   "dependencies": {
     "bluebird": "registry:npm/bluebird#3.2.1+20160211005852",
     "interactivesolutions-event-manager": "bower:interactivesolutions-event-manager"
+  },
+  "globalDependencies": {
+    "angular": "registry:dt/angular#1.5.0+20160602160139",
+    "angular-ui-router": "registry:dt/angular-ui-router#1.1.5+20160521151413",
+    "jquery": "registry:dt/jquery#1.10.0+20160417213236"
   }
 }

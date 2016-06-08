@@ -5,7 +5,7 @@
  */
 
 import {QueryString} from "./utils";
-import {EventManager} from "interactivesolutions-event-manager";
+import EventManager = require("~interactivesolutions-event-manager/event-manager");
 
 /**
  * Simple data container for the access token

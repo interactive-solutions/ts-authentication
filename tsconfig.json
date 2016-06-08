@@ -5,7 +5,7 @@
   },
 
   "files": [
-    "./typings/main.d.ts",
+    "./typings/index.d.ts",
     "./src/module.ts"
   ]
 }

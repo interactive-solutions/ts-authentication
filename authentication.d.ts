@@ -4,7 +4,9 @@
  * @copyright Interactive Solutions AB
  */
 
-declare module 'interactivesolutions' {
+import EventManager = require("./bower_components/interactivesolutions-event-manager/event-manager");
+
+declare module '~interactivesolutions-ts-authentication/authentication' {
 
     function HttpAuthorizationInjector(authenticationStorage: AuthenticationStorage): {
         request: (request: ng.IRequestConfig) => ng.IRequestConfig;
