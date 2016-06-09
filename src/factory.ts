@@ -4,54 +4,55 @@
  * @copyright Interactive Solutions AB
  */
 
-import {AuthenticationStorage, AuthenticationService} from "./service";
+module InteractiveSolutions.Authentication {
 
-interface IsRequestConfig extends ng.IRequestConfig {
-  disableAuthorizationHeader?:boolean;
-}
+  interface IsRequestConfig extends ng.IRequestConfig {
+    disableAuthorizationHeader?:boolean;
+  }
 
-export function HttpAuthorizationInjector(authenticationStorage:AuthenticationStorage) {
-  return {
-    request: function (request:IsRequestConfig) {
-      if (request.url.indexOf('/oauth/token') !== -1) {
+  export function HttpAuthorizationInjector(authenticationStorage:AuthenticationStorage) {
+    return {
+      request: function (request:IsRequestConfig) {
+        if (request.url.indexOf('/oauth/token') !== -1) {
+          return request;
+        }
+
+        var token = authenticationStorage.read();
+        if (token && !request.disableAuthorizationHeader) {
+          request.headers['Authorization'] = 'Bearer ' + token.getAccessToken();
+        }
+
         return request;
       }
+    };
+  }
 
-      var token = authenticationStorage.read();
-      if (token && !request.disableAuthorizationHeader) {
-        request.headers['Authorization'] = 'Bearer ' + token.getAccessToken();
-      }
+  export function HttpRefreshTokenInjector(loginStateName:string, $q:ng.IQService, $injector:any) {
 
-      return request;
-    }
-  };
-}
+    return {
+      responseError: function (response:ng.IHttpPromiseCallbackArg<any>) {
 
-export function HttpRefreshTokenInjector(loginStateName:string, $q:ng.IQService, $injector:any) {
+        var httpService:ng.IHttpService = $injector.get('$http');
+        var authService:AuthenticationService = $injector.get('authenticationService');
+        var authStorage:AuthenticationStorage = $injector.get('authenticationStorage');
+        var stateService:ng.ui.IStateService = $injector.get('$state');
 
-  return {
-    responseError: function (response:ng.IHttpPromiseCallbackArg<any>) {
+        if (response.status === 401) {
 
-      var httpService:ng.IHttpService = $injector.get('$http');
-      var authService:AuthenticationService = $injector.get('authenticationService');
-      var authStorage:AuthenticationStorage = $injector.get('authenticationStorage');
-      var stateService:ng.ui.IStateService = $injector.get('$state');
+          if (authStorage.hasAccessToken()) {
 
-      if (response.status === 401) {
+            return authService
+              .refresh()
+              .then(() => httpService(response.config))
+              .catch(() => authStorage.clear());
 
-        if (authStorage.hasAccessToken()) {
-
-          return authService
-            .refresh()
-            .then(() => httpService(response.config))
-            .catch(() => authStorage.clear());
-
-        } else {
-          stateService.go(loginStateName);
+          } else {
+            stateService.go(loginStateName);
+          }
         }
-      }
 
-      return $q.reject(response);
-    }
-  };
+        return $q.reject(response);
+      }
+    };
+  }
 }

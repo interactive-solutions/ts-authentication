@@ -8,10 +8,10 @@ var __extends = (this && this.__extends) || function (d, b) {
  *
  * @copyright Interactive Solutions AB
  */
-var InteractiveSolutions;
-(function (InteractiveSolutions) {
-    var Authentication;
-    (function (Authentication) {
+var interactivesolutions;
+(function (interactivesolutions) {
+    var authentication;
+    (function (authentication) {
         function HttpAuthorizationInjector(authenticationStorage) {
             return {
                 request: function (request) {
@@ -26,7 +26,7 @@ var InteractiveSolutions;
                 }
             };
         }
-        Authentication.HttpAuthorizationInjector = HttpAuthorizationInjector;
+        authentication.HttpAuthorizationInjector = HttpAuthorizationInjector;
         function HttpRefreshTokenInjector(loginStateName, $q, $injector) {
             return {
                 responseError: function (response) {
@@ -49,39 +49,39 @@ var InteractiveSolutions;
                 }
             };
         }
-        Authentication.HttpRefreshTokenInjector = HttpRefreshTokenInjector;
-    })(Authentication = InteractiveSolutions.Authentication || (InteractiveSolutions.Authentication = {}));
-})(InteractiveSolutions || (InteractiveSolutions = {}));
+        authentication.HttpRefreshTokenInjector = HttpRefreshTokenInjector;
+    })(authentication = interactivesolutions.authentication || (interactivesolutions.authentication = {}));
+})(interactivesolutions || (interactivesolutions = {}));
 /**
- * @author Erik Norgren <erik.norgren@InteractiveSolutions.se>
+ * @author Erik Norgren <erik.norgren@interactivesolutions.se>
  *
  * @copyright Interactive Solutions
  */
-var InteractiveSolutions;
-(function (InteractiveSolutions) {
-    var Authentication;
-    (function (Authentication) {
+var interactivesolutions;
+(function (interactivesolutions) {
+    var authentication;
+    (function (authentication) {
         angular
-            .module('interactivesolutions.authentication', [])
-            .service('authenticationService', Authentication.AuthenticationService)
-            .service('authenticationStorage', Authentication.AuthenticationStorage)
-            .factory('httpAuthorizationInjector', Authentication.HttpAuthorizationInjector)
-            .factory('httpRefreshTokenInjector', Authentication.HttpRefreshTokenInjector)
+            .module('~interactivesolutions-ts-authentication/authentication', [])
+            .service('authenticationService', authentication.AuthenticationService)
+            .service('authenticationStorage', authentication.AuthenticationStorage)
+            .factory('httpAuthorizationInjector', authentication.HttpAuthorizationInjector)
+            .factory('httpRefreshTokenInjector', authentication.HttpRefreshTokenInjector)
             .config(function ($httpProvider) {
             $httpProvider.interceptors.push('httpAuthorizationInjector');
             $httpProvider.interceptors.push('httpRefreshTokenInjector');
         });
-    })(Authentication = InteractiveSolutions.Authentication || (InteractiveSolutions.Authentication = {}));
-})(InteractiveSolutions || (InteractiveSolutions = {}));
+    })(authentication = interactivesolutions.authentication || (interactivesolutions.authentication = {}));
+})(interactivesolutions || (interactivesolutions = {}));
 /**
  * @author    Antoine Hedgecock <antoine.hedgecock@gmail.com>
  *
  * @copyright Interactive Solutions AB
  */
-var InteractiveSolutions;
-(function (InteractiveSolutions) {
-    var Authentication;
-    (function (Authentication) {
+var interactivesolutions;
+(function (interactivesolutions) {
+    var authentication;
+    (function (authentication) {
         /**
          * Simple data container for the access token
          */
@@ -110,7 +110,7 @@ var InteractiveSolutions;
             };
             return AccessToken;
         }());
-        Authentication.AccessToken = AccessToken;
+        authentication.AccessToken = AccessToken;
         var AuthenticationStorage = (function () {
             function AuthenticationStorage() {
                 this.accessToken = null;
@@ -151,7 +151,7 @@ var InteractiveSolutions;
             };
             return AuthenticationStorage;
         }());
-        Authentication.AuthenticationStorage = AuthenticationStorage;
+        authentication.AuthenticationStorage = AuthenticationStorage;
         var AuthenticationService = (function (_super) {
             __extends(AuthenticationService, _super);
             /**
@@ -173,7 +173,7 @@ var InteractiveSolutions;
              */
             AuthenticationService.prototype.login = function (parameters) {
                 var _this = this;
-                var queryString = Authentication.QueryString.stringify(parameters);
+                var queryString = authentication.QueryString.stringify(parameters);
                 return this.http({
                     method: 'POST',
                     url: '/oauth/token',
@@ -199,7 +199,7 @@ var InteractiveSolutions;
                 if (this.refreshPromise) {
                     return this.refreshPromise;
                 }
-                var queryString = Authentication.QueryString.stringify({
+                var queryString = authentication.QueryString.stringify({
                     grant_type: 'refresh_token',
                     refresh_token: this.storage.read().getRefreshToken()
                 });
@@ -247,19 +247,19 @@ var InteractiveSolutions;
                 this.emit('authentication-changed', this);
             };
             return AuthenticationService;
-        }(InteractiveSolutions.EventManager.EventManager));
-        Authentication.AuthenticationService = AuthenticationService;
-    })(Authentication = InteractiveSolutions.Authentication || (InteractiveSolutions.Authentication = {}));
-})(InteractiveSolutions || (InteractiveSolutions = {}));
+        }(EventManager));
+        authentication.AuthenticationService = AuthenticationService;
+    })(authentication = interactivesolutions.authentication || (interactivesolutions.authentication = {}));
+})(interactivesolutions || (interactivesolutions = {}));
 /**
- * @author Erik Norgren <erik.norgren@InteractiveSolutions.se>
+ * @author Erik Norgren <erik.norgren@interactivesolutions.se>
  *
  * @copyright Interactive Solutions
  */
-var InteractiveSolutions;
-(function (InteractiveSolutions) {
-    var Authentication;
-    (function (Authentication) {
+var interactivesolutions;
+(function (interactivesolutions) {
+    var authentication;
+    (function (authentication) {
         /**
          * Utility query string class
          */
@@ -316,7 +316,6 @@ var InteractiveSolutions;
             };
             return QueryString;
         }());
-        Authentication.QueryString = QueryString;
-    })(Authentication = InteractiveSolutions.Authentication || (InteractiveSolutions.Authentication = {}));
-})(InteractiveSolutions || (InteractiveSolutions = {}));
-//# sourceMappingURL=dist.js.map
+        authentication.QueryString = QueryString;
+    })(authentication = interactivesolutions.authentication || (interactivesolutions.authentication = {}));
+})(interactivesolutions || (interactivesolutions = {}));
