@@ -1,12 +1,13 @@
 /**
  * @author Erik Norgren <erik.norgren@interactivesolutions.se>
- *   
+ *
  * @copyright Interactive Solutions
  */
 
 /**
  * Utility query string class
  */
+
 export class QueryString {
 
   /**
@@ -15,6 +16,7 @@ export class QueryString {
    * @param obj
    * @returns {string}
    */
+
   public static stringify(obj:any):string {
 
     var queryString:string = obj ? Object.keys(obj).sort().map(function (key) {

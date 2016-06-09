@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
     "sourceMap": true,
-    "module": "commonjs"
+    "module": "system",
+    "outFile": "./dist.js"
   },
-
-  "files": [
-    "./typings/index.d.ts",
-    "./src/module.ts"
+  "exclude": [
+    "typings",
+    "bower_components",
+    "authentication.d.ts"
   ]
 }

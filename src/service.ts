@@ -4,12 +4,13 @@
  * @copyright Interactive Solutions AB
  */
 
-import {QueryString} from "./utils";
-import EventManager = require("~interactivesolutions-event-manager/event-manager");
-
 /**
  * Simple data container for the access token
  */
+
+import {QueryString} from "./utils";
+import EventManager = require("~interactivesolutions-event-manager/event-manager");
+
 export class AccessToken {
   constructor(private accessToken:string,
               private ownerId:any,

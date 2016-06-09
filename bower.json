@@ -22,12 +22,11 @@
     "test",
     "tests"
   ],
-
   "dependencies": {
     "angular": "^1.4",
-    "interactivesolutions-event-manager": "0.0.5"
+    "interactivesolutions-event-manager": "0.0.5",
+    "angular-ui-router": "^0.3.1"
   },
-
   "main": "authentication.release.js",
   "typescript": {
     "definition": "authentication.d.ts"

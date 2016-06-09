@@ -4,6 +4,8 @@
  * @copyright Interactive Solutions
  */
 
+/// <reference path="../typings/index.d.ts" />
+
 import {AuthenticationService, AuthenticationStorage} from "./service";
 import {HttpAuthorizationInjector, HttpRefreshTokenInjector} from "./factory";
 
