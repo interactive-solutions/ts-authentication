@@ -1,6 +1,6 @@
 {
   "name": "ts-authentication",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "homepage": "https://github.com/interactive-solutions/ts-authentication",
   "authors": [
     "Antoine Hedgecock <antoine.hedgecock@gmail.com>",
@@ -27,7 +27,7 @@
     "interactivesolutions-event-manager": "0.0.5",
     "angular-ui-router": "^0.3.1"
   },
-  "main": "authentication.release.js",
+  "main": "dist.js",
   "typescript": {
     "definition": "authentication.d.ts"
   }
