@@ -76,5 +76,20 @@ declare namespace InteractiveSolutions.Authentication {
      */
     logout(): void;
   }
+
+  class QueryString {
+
+    /**
+     * Convert a object to a query string
+     *
+     * @param obj
+     */
+    public static stringify(obj:any): string;
+
+    /**
+     * Parse the current window query string
+     */
+    public static parse(): string|boolean;
+  }
 }
 
