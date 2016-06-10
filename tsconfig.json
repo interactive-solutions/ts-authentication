@@ -4,7 +4,11 @@
     "sourceMap": true
   },
 
-  "exclude": [
-    "authentication.d.ts"
+  "files": [
+    "typings/index.d.ts",
+    "src/factory.ts",
+    "src/service.ts",
+    "src/utils.ts",
+    "src/module.ts"
   ]
 }
