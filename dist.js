@@ -96,11 +96,11 @@ var InteractiveSolutions;
                 this.fromLocalStorage();
             }
             AuthenticationStorage.prototype.write = function (accessToken) {
-                localStorage.setItem('auth: accessToken', accessToken.getAccessToken());
-                localStorage.setItem('auth: ownerId', accessToken.getOwnerId());
-                localStorage.setItem('auth: refreshToken', accessToken.getRefreshToken());
-                localStorage.setItem('auth: expiresAt', accessToken.getExpiresAt().toString());
-                localStorage.setItem('auth: tokenType', accessToken.getTokenType());
+                localStorage.setItem('auth:accessToken', accessToken.getAccessToken());
+                localStorage.setItem('auth:ownerId', accessToken.getOwnerId());
+                localStorage.setItem('auth:refreshToken', accessToken.getRefreshToken());
+                localStorage.setItem('auth:expiresAt', accessToken.getExpiresAt().toString());
+                localStorage.setItem('auth:tokenType', accessToken.getTokenType());
                 this.accessToken = accessToken;
             };
             AuthenticationStorage.prototype.read = function () {
@@ -108,21 +108,21 @@ var InteractiveSolutions;
             };
             AuthenticationStorage.prototype.clear = function () {
                 this.accessToken = null;
-                localStorage.removeItem('auth: accessToken');
-                localStorage.removeItem('auth: refreshToken');
-                localStorage.removeItem('auth: ownerId');
-                localStorage.removeItem('auth: expiresAt');
-                localStorage.removeItem('auth: tokenType');
+                localStorage.removeItem('auth:accessToken');
+                localStorage.removeItem('auth:refreshToken');
+                localStorage.removeItem('auth:ownerId');
+                localStorage.removeItem('auth:expiresAt');
+                localStorage.removeItem('auth:tokenType');
             };
             AuthenticationStorage.prototype.hasAccessToken = function () {
                 return this.accessToken !== null;
             };
             AuthenticationStorage.prototype.fromLocalStorage = function () {
-                var accessToken = localStorage.getItem('auth: accessToken');
-                var ownerId = localStorage.getItem('auth: ownerId');
-                var refreshToken = localStorage.getItem('auth: refreshToken');
-                var expiresAt = localStorage.getItem('auth: expiresAt');
-                var tokenType = localStorage.getItem('auth: tokenType');
+                var accessToken = localStorage.getItem('auth:accessToken');
+                var ownerId = localStorage.getItem('auth:ownerId');
+                var refreshToken = localStorage.getItem('auth:refreshToken');
+                var expiresAt = localStorage.getItem('auth:expiresAt');
+                var tokenType = localStorage.getItem('auth:tokenType');
                 if (accessToken === null || refreshToken === null) {
                     return;
                 }
