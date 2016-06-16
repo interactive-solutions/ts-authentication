@@ -48,11 +48,11 @@ module InteractiveSolutions.Authentication {
     }
 
     write(accessToken:AccessToken) {
-      localStorage.setItem('auth: accessToken', accessToken.getAccessToken());
-      localStorage.setItem('auth: ownerId', accessToken.getOwnerId());
-      localStorage.setItem('auth: refreshToken', accessToken.getRefreshToken());
-      localStorage.setItem('auth: expiresAt', accessToken.getExpiresAt().toString());
-      localStorage.setItem('auth: tokenType', accessToken.getTokenType());
+      localStorage.setItem('auth:accessToken', accessToken.getAccessToken());
+      localStorage.setItem('auth:ownerId', accessToken.getOwnerId());
+      localStorage.setItem('auth:refreshToken', accessToken.getRefreshToken());
+      localStorage.setItem('auth:expiresAt', accessToken.getExpiresAt().toString());
+      localStorage.setItem('auth:tokenType', accessToken.getTokenType());
 
       this.accessToken = accessToken;
     }
@@ -64,11 +64,11 @@ module InteractiveSolutions.Authentication {
     clear():void {
       this.accessToken = null;
 
-      localStorage.removeItem('auth: accessToken');
-      localStorage.removeItem('auth: refreshToken');
-      localStorage.removeItem('auth: ownerId');
-      localStorage.removeItem('auth: expiresAt');
-      localStorage.removeItem('auth: tokenType');
+      localStorage.removeItem('auth:accessToken');
+      localStorage.removeItem('auth:refreshToken');
+      localStorage.removeItem('auth:ownerId');
+      localStorage.removeItem('auth:expiresAt');
+      localStorage.removeItem('auth:tokenType');
     }
 
     hasAccessToken():boolean {
@@ -76,11 +76,11 @@ module InteractiveSolutions.Authentication {
     }
 
     private fromLocalStorage():void {
-      var accessToken = localStorage.getItem('auth: accessToken');
-      var ownerId = localStorage.getItem('auth: ownerId');
-      var refreshToken = localStorage.getItem('auth: refreshToken');
-      var expiresAt = localStorage.getItem('auth: expiresAt');
-      var tokenType = localStorage.getItem('auth: tokenType');
+      var accessToken = localStorage.getItem('auth:accessToken');
+      var ownerId = localStorage.getItem('auth:ownerId');
+      var refreshToken = localStorage.getItem('auth:refreshToken');
+      var expiresAt = localStorage.getItem('auth:expiresAt');
+      var tokenType = localStorage.getItem('auth:tokenType');
 
       if (accessToken === null || refreshToken === null) {
         return;
